@@ -1,0 +1,85 @@
+name: Wiki Maintainer
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+    paths:
+      - '**/*.py'
+  workflow_dispatch:
+    inputs:
+      task:
+        description: 'Task to perform'
+        required: true
+        default: ''
+
+jobs:
+  update-wiki:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      id-token: write
+      actions: read
+      repository-projects: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get changed files
+        id: changed-files
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            # For manual dispatch, leave empty - rely on manual task input
+            CHANGED_FILES=""
+            echo "Manual dispatch - no specific files, using task input"
+          else
+            # Get files changed in the merged PR
+            CHANGED_FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }} | grep '\.py$' | tr '\n' ' ')
+            echo "PR merge - files changed: $CHANGED_FILES"
+          fi
+          echo "changed_files=$CHANGED_FILES" >> $GITHUB_OUTPUT
+
+      - name: Checkout wiki repository
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository }}.wiki
+          path: wiki-repo
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "wikiclanker[bot]"
+          git config --global user.email "wikiclanker[bot]@users.noreply.github.com"
+
+      - name: Run Wiki Maintainer
+        id: wiki-maintainer
+        uses: anthropics/claude-code-action@v1
+        env:
+          ALLOWED_TOOLS: "Edit,Read,Write,Bash,mcp__*"
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          claude_args: |
+            --allowedTools "Edit,Read,Write,Bash,mcp__*"
+          prompt: |
+
+            You are the documentation maintainer for the ${{ github.event.repository.name }} project.
+            
+            ${{ inputs.task && format('## Manual Task Request:\n{0}\n', inputs.task) || '' }}
+            ${{ steps.changed-files.outputs.changed_files && format('## Changed Python Files:\n{0}\n', steps.changed-files.outputs.changed_files) || 'No code change detected.' }}
+
+            ### Instructions:
+            - **Only update the wiki if changes affect user-facing features, APIs, configs, or architecture.**
+            - **Skip** for bug fixes, refactors, or internal changes.
+            - Work in the `wiki-repo/` directory.
+            - Follow existing wiki style: clear headers, bullet points, code blocks, [[Page Links]].
+            - If no updates needed, **do nothing** and quit early, DONT waste tokens.
+            - If updates are made:
+                cd wiki-repo
+                git add .
+                git commit -m "docs(wiki): brief one-line message"
+                git push

@@ -1,0 +1,80 @@
+@startuml
+title Kyros Plotly SaaS – Auth & Tenant Isolation (MVP, compact)
+
+actor U as "User"
+participant Shell as "Shell UI"
+participant B2C as "Azure AD B2C"
+participant Auth as "FastAPI Auth API"
+database Meta as "Tenant DB"
+participant Data as "FastAPI Data API"
+participant Dash as "Dash App"
+collections Store as "Azure Storage"
+collections Mon as "Prometheus/Grafana"
+participant Log as "Loki"
+
+== Login ==
+U -> Shell: Open /login
+Shell -> B2C: OIDC auth request
+B2C --> Shell: Redirect + code
+Shell -> B2C: Token exchange
+B2C --> Shell: ID + Access tokens
+
+== Tenant discovery ==
+Shell -> Auth: GET /me (Bearer user token)
+Auth -> Auth: Validate JWT (sig/exp)
+Auth -> Meta: Lookup user↔tenants
+Meta --> Auth: tenant_ids, roles
+Auth --> Shell: tenant_ids
+alt Multi-tenant
+  U -> Shell: Choose tenant
+end
+
+== Token exchange (recommended) ==
+Shell -> Auth: POST /token/exchange (tenant)
+Auth -> Meta: Verify mapping
+Meta --> Auth: OK
+Auth --> Shell: Tenant-scoped JWT (short-lived)
+
+== Embed Dash ==
+Shell -> Dash: Open /dash/{slug}\n(token via header/proxy)
+
+== Load dashboards ==
+Dash -> Data: GET /tenant/{id}/dashboards (Bearer)
+Data -> Data: Validate JWT + tenant_id
+Data -> Meta: Fetch dashboards/config
+Meta --> Data: Config
+Data --> Dash: Config
+
+== Data query (tenant-scoped) ==
+loop Callbacks / queries
+  Dash -> Data: GET /dash/{slug}/data (Bearer)
+  Data -> Data: Validate JWT + tenant_id
+  Data -> Meta: Resolve path /processed/{id}/...
+  Meta --> Data: Path
+  Data -> Store: Read data
+  Store --> Data: Dataset
+  Data --> Dash: Filtered data
+end
+
+== Save prefs (optional) ==
+Dash -> Data: POST /prefs {filters, layout}
+Data -> Data: Validate JWT + tenant_id
+Data -> Meta: Upsert prefs JSON
+Meta --> Data: OK
+Data --> Dash: 200 OK
+
+== Audit & observability ==
+Data -> Meta: INSERT audit_log {sub,email,tenant_id,action}
+Data -> Mon: Emit metrics (labels: tenant_id, slug)
+Data -> Log: Structured logs (tenant_id, sub, route)
+
+== Failures ==
+alt Invalid/expired token
+  Auth --> Shell: 401
+  Data --> Dash: 401
+else Unauthorized tenant
+  Auth --> Shell: 403
+  Data --> Dash: 403
+end
+
+@enduml

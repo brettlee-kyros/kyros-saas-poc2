@@ -1,0 +1,112 @@
+# deploy.yml
+
+name: Deploy to Dash Enterprise
+
+on:
+  push:
+    tags:
+      - 'v*'          # Prod tags
+      - 'uat-*'       # UAT tags
+      - 'dev-*'       # Development tags
+      - 'demo-*'      # Demo tags
+
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        required: true
+        default: 'dev'
+        type: choice
+        options:
+          - 'prod'
+          - 'uat'
+          - 'dev'
+          - 'demo'
+      app_name:
+        description: 'Application Name (leave empty to use default)'
+        required: false
+        type: string
+
+jobs:
+  determine-environment:
+    name: 'Determine Environment'
+    runs-on: ubuntu-latest
+    outputs:
+      environment: ${{ steps.env-logic.outputs.environment }}
+      dbx_hostname_var: ${{ steps.env-logic.outputs.dbx_hostname_var }}
+      dbx_warehouse_var: ${{ steps.env-logic.outputs.dbx_warehouse_var }}
+      access_token_secret: ${{ steps.env-logic.outputs.access_token_secret }}
+      system_catalog_var: ${{ steps.env-logic.outputs.system_catalog_var }}
+    steps:
+      - name: 'Determine environment from tag or input'
+        id: env-logic
+        run: |
+          # Determine environment
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            ENV="${{ inputs.environment }}"
+          else
+            # Extract environment from tag
+            TAG="${{ github.ref }}"
+            case $TAG in
+              refs/tags/v*)       ENV="prod" ;;
+              refs/tags/uat-*)    ENV="uat" ;;
+              refs/tags/dev-*)    ENV="dev" ;;
+              refs/tags/demo-*)   ENV="demo" ;;
+              *)                  ENV="dev" ;;  # fallback
+            esac
+          fi
+          
+          echo "environment=${ENV}" >> $GITHUB_OUTPUT
+          echo "Environment determined: ${ENV}"
+          
+          # Set environment-specific variable names
+          if [ "$ENV" = "prod" ]; then
+            PREFIX=""
+          else
+            PREFIX="${ENV^^}_"  # Uppercase env with underscore
+          fi
+
+          # dev and demo use DEV_SYSTEM_CATALOG, prod and uat use SYSTEM_CATALOG
+          CATALOG="SYSTEM_CATALOG"
+          if [ "$ENV" = "dev" ] || [ "$ENV" = "demo" ]; then
+            CATALOG="DEV_SYSTEM_CATALOG"
+          fi
+          
+          echo "dbx_hostname_var=${PREFIX}DBX_SERVER_HOSTNAME" >> $GITHUB_OUTPUT
+          echo "dbx_warehouse_var=${PREFIX}DBX_WAREHOUSE_HTTP_PATH" >> $GITHUB_OUTPUT
+          echo "access_token_secret=${PREFIX}ACCESS_TOKEN" >> $GITHUB_OUTPUT
+          echo "system_catalog_var=${CATALOG}" >> $GITHUB_OUTPUT
+
+  deploy:
+    name: 'Deploy to Dash Enterprise (${{ needs.determine-environment.outputs.environment }})'
+    runs-on: ubuntu-latest
+    needs: determine-environment
+    steps:
+      - name: 'Checkout code'
+        uses: actions/checkout@v4
+
+      - name: 'Set up Python 3.10'
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: 'Prepare requirements.txt for deployment'
+        run: |
+          echo "Updating requirements.txt for private package access"
+          sed -i 's|pkgs.dev.azure.com|${{ secrets.AZURE_PAT }}@pkgs.dev.azure.com|g' requirements.txt
+
+      - name: 'Deploy to Dash Enterprise'
+        uses: kyrosinsights/dash-deploy@v1
+        with:
+          app-name: ${{ github.event.inputs.app_name || vars.APP_NAME_BASE }}
+          environment: ${{ needs.determine-environment.outputs.environment }}
+          de-host: ${{ vars.DE_HOST }}
+          de-username: ${{ vars.DE_USERNAME }}
+          de-password: ${{ vars.DE_PASSWORD }}
+          env-vars: |
+            DBX_SERVER_HOSTNAME=${{ vars[needs.determine-environment.outputs.dbx_hostname_var] }}
+            DBX_WAREHOUSE_HTTP_PATH=${{ vars[needs.determine-environment.outputs.dbx_warehouse_var] }}
+            ACCESS_TOKEN=${{ secrets[needs.determine-environment.outputs.access_token_secret] }}
+            SYSTEM_CATALOG=${{ vars[needs.determine-environment.outputs.system_catalog_var] }}
+            UNIONED_SCHEMA_TABLE_PATH=${{ vars.UNIONED_SCHEMA_TABLE_PATH }}
+            CATALOG_FILTER=${{ vars.CATALOG_FILTER }}

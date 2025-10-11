@@ -1,0 +1,165 @@
+# pr-preview.yml
+
+name: PR Preview Deployment
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  preview:
+    name: 'Preview Deployment'
+    runs-on: ubuntu-latest
+    # Skip if PR is from a fork (can't access secrets)
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    steps:
+      - name: 'Set Preview App Name'
+        id: app-name
+        run: |
+          PR_NUMBER="${{ github.event.pull_request.number }}"
+          APP_NAME="${{ vars.APP_NAME_BASE }}-pr-${PR_NUMBER}"
+          echo "APP_NAME=${APP_NAME}" >> $GITHUB_OUTPUT
+          echo "Preview app name: ${APP_NAME}"
+
+      - name: 'Checkout code'
+        if: github.event.action != 'closed'
+        uses: actions/checkout@v4
+
+      - name: 'Set up Python 3.10'
+        if: github.event.action != 'closed'
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: 'Prepare requirements.txt for deployment'
+        if: github.event.action != 'closed'
+        run: |
+          echo "Updating requirements.txt for private package access"
+          sed -i 's|pkgs.dev.azure.com|${{ secrets.AZURE_PAT }}@pkgs.dev.azure.com|g' requirements.txt
+
+      - name: 'Deploy Preview'
+        if: github.event.action != 'closed'
+        uses: kyrosinsights/dash-deploy@v1
+        with:
+          app-name: ${{ steps.app-name.outputs.APP_NAME }}
+          environment: 'dev'
+          de-host: ${{ vars.DE_HOST }}
+          de-username: ${{ vars.DE_USERNAME }}
+          de-password: ${{ vars.DE_PASSWORD }}
+          env-vars: |
+            DBX_SERVER_HOSTNAME=${{ vars.DEV_DBX_SERVER_HOSTNAME }}
+            DBX_WAREHOUSE_HTTP_PATH=${{ vars.DEV_DBX_WAREHOUSE_HTTP_PATH }}
+            ACCESS_TOKEN=${{ secrets.DEV_ACCESS_TOKEN }}
+            SYSTEM_CATALOG=${{ vars.DEV_SYSTEM_CATALOG }}
+            UNIONED_SCHEMA_TABLE_PATH=${{ vars.UNIONED_SCHEMA_TABLE_PATH }}
+            CATALOG_FILTER=${{ vars.CATALOG_FILTER }}
+
+      - name: 'Comment Preview URL on PR'
+        if: github.event.action != 'closed'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const appName = '${{ steps.app-name.outputs.APP_NAME }}-dev';
+            const deHost = '${{ vars.DE_HOST }}';
+            const previewUrl = `https://${deHost}/${appName}`;
+            const prNumber = context.issue.number;
+            
+            // Check if we already commented
+            const comments = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+            });
+            
+            const botComment = comments.data.find(comment => 
+              comment.user.type === 'Bot' && 
+              comment.body.includes('🚀 Preview Deployment')
+            );
+            
+            const dashboardUrl = `https://${deHost}/apps/${appName}`;
+            
+            const commentBody = `## 🚀 Preview Deployment Ready!
+            
+            Your preview environment has been deployed and is ready for testing.
+            
+            **🔗 Preview URL:** ${previewUrl}
+            **📊 Dashboard:** [View Deployment Status](${dashboardUrl})
+            
+            This preview will be automatically updated on every commit and destroyed when the PR is merged or closed.
+            
+            ---
+            *Deployed from commit: ${context.sha.substring(0, 7)}*`;
+            
+            if (botComment) {
+              // Update existing comment
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body: commentBody
+              });
+            } else {
+              // Create new comment
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                body: commentBody
+              });
+            }
+
+      - name: 'Destroy Preview App'
+        if: github.event.action == 'closed'
+        run: |
+          APP_NAME="${{ steps.app-name.outputs.APP_NAME }}-dev"
+          DE_HOST="${{ vars.DE_HOST }}"
+          
+          echo "Destroying preview app: ${APP_NAME}"
+          
+          # Install de-client
+          python -m pip install --upgrade pip
+          pip install de-client --extra-index-url=https://${DE_HOST}/packages
+          pip install graphql-core
+          
+          # Login
+          de --host ${DE_HOST} --no-keyfile login
+          
+          # Check if app exists and delete it
+          exists=$(de --no-keyfile apps exists -n ${APP_NAME})
+          if [[ $exists != *"does not exist"* ]]; then
+            echo "Deleting app..."
+            de --no-keyfile apps delete -n ${APP_NAME}
+            echo "Preview app destroyed successfully!"
+          else
+            echo "App does not exist, nothing to destroy."
+          fi
+        env:
+          DASH_ENTERPRISE_HOST: ${{ vars.DE_HOST }}
+          DASH_ENTERPRISE_USERNAME: ${{ vars.DE_USERNAME }}
+          DASH_ENTERPRISE_PASSWORD: ${{ vars.DE_PASSWORD }}
+
+      - name: 'Comment Cleanup on PR'
+        if: github.event.action == 'closed'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const appName = '${{ steps.app-name.outputs.APP_NAME }}-dev';
+            const prNumber = context.issue.number;
+            
+            const commentBody = `## 🧹 Preview Deployment Cleaned Up
+            
+            The preview environment \`${appName}\` has been destroyed as this PR was ${{ github.event.pull_request.merged && 'merged' || 'closed' }}.`;
+            
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+              body: commentBody
+            });
+

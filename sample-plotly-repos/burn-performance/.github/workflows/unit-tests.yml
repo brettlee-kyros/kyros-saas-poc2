@@ -1,0 +1,79 @@
+name: Unit Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: 'Run Unit Tests'
+    runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      contents: read
+
+    steps:
+      - name: 'Checkout code'
+        uses: actions/checkout@v4
+
+      - name: 'Set up Python 3.10'
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: 'Cache venv'
+        id: cache-venv
+        uses: actions/cache@v3
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-py3.10-${{ secrets.CACHE_VERSION }}
+          restore-keys: |
+            venv-${{ runner.os }}-py3.10-
+
+      - name: 'Prepare requirements-dev.txt for deployment'
+        run: |
+          echo "Updating requirements-dev.txt for private package access"
+          sed -i 's|pkgs.dev.azure.com|${{ secrets.AZURE_PAT }}@pkgs.dev.azure.com|g' requirements-dev.txt
+
+      - name: 'Create virtual environment'
+        if: steps.cache-venv.outputs.cache-hit != 'true'
+        run: |
+          python -m venv .venv
+          source .venv/bin/activate
+          python -m pip install --upgrade pip
+
+      - name: 'Activate virtual environment'
+        if: steps.cache-venv.outputs.cache-hit == 'true'
+        run: |
+          source .venv/bin/activate
+          echo "Virtual environment activated from cache"
+
+      - name: 'Verify dependencies'
+        run: |
+          source .venv/bin/activate
+          pip install -r requirements-dev.txt
+          pip list
+
+      - name: 'Run Unit Tests with Coverage'
+        run: |
+          source .venv/bin/activate
+          pytest --cov=. --cov-report=xml --cov-report=term --cov-branch --junitxml=junit/test-results.xml
+        continue-on-error: false
+
+      - name: 'Publish Test Results'
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: 'Python Unit Tests'
+          path: 'junit/test-results.xml'
+          reporter: java-junit
+          fail-on-error: false
+
+      - name: 'Publish Coverage Report'
+        uses: codecov/codecov-action@v3
+        if: always()
+        with:
+          file: ./coverage.xml
+          fail_ci_if_error: false

@@ -1,0 +1,85 @@
+[
+    {
+        "schema_name": "mix",
+        "schema_version": "1",
+        "modification_date": "20240331__123456",
+        "title": "tml5__mix__1__20240331__123456",
+        "description": "mix exhibit for tml5 model version 1",
+        "properties": {
+            "segments": {
+                "Cluster": "cluster_collapse"
+            },
+            "mix_type": "Snapshot Date",
+            "date": "snapshotDate",
+            "variable": "predictor",
+            "weights": {
+                "Member Count": "count"
+            },
+            "bucket_id": "bucket_id",
+            "bucket_name": "bucket_name"
+        }
+    },
+    {
+        "schema_name": "mix",
+        "schema_version": "1",
+        "modification_date": "20240331__123456",
+        "title": "snapshot__mix__1__20240331__123456",
+        "description": "mix exhibit for snapshot model version 1",
+        "properties": {
+            "segments": {
+                "Segment 1": "segment_1",
+                "Segment 2": "segment_2"
+            },
+            "date": "snapshotDate",
+            "mix_type": "Snapshot Date",
+            "variable": "variable",
+            "weights": {
+                "Member Count": "mbrs",
+                "Earned Points": "earn",
+                "Outstanding Points": "outs"
+            },
+            "bucket_id": "bucket_id",
+            "bucket_name": "bucket_name"
+        }
+    },
+    {
+        "schema_name": "mix",
+        "schema_version": "1",
+        "modification_date": "20240331__123456",
+        "title": "join__mix__1__20240331__123456",
+        "description": "mix exhibit for join model version 1",
+        "properties": {
+            "segments": {
+                "Channel": "mbr_channel_grp"
+            },
+            "date": "joinMonth",
+            "mix_type": "Join Month",
+            "variable": "variable",
+            "weights": {
+                "Member Count": "mbrs"
+            },
+            "bucket_id": "bucket_id",
+            "bucket_name": "bucket_name"
+        }
+    },
+    {
+        "schema_name": "mix",
+        "schema_version": "1",
+        "modification_date": "20240331__123456",
+        "title": "earn__mix__1__20240331__123456",
+        "description": "mix exhibit for earn model version 1",
+        "properties": {
+            "segments": {
+                "Transaction Type": "transactionType"
+            },
+            "date": "earnMonth",
+            "mix_type": "Earn Month",
+            "variable": "variable",
+            "weights": {
+                "Earned Points": "earn"
+            },
+            "bucket_id": "bucket_id",
+            "bucket_name": "bucket_name"
+        }
+    }
+]

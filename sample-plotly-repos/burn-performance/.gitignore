@@ -1,0 +1,26 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Cursor rules
+.cursor/
+
+# Virtual environment directories
+.env
+env/
+.venv/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.vscode/
+
+# Log files and directories
+logs/
+*.log
+log/
+.qodo
+
+# common sub repos
+kyros-plotly-common/

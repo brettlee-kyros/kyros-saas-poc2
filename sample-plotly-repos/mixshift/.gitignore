@@ -1,0 +1,24 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+
+# Virtual environment directories
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+.env
+
+# Log files and directories
+logs/
+*.log
+log/
+
+kyros-plotly-common/
+
+.qodo
+.vscode/
