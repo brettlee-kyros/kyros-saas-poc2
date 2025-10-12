@@ -1,0 +1,110 @@
+# Shared Configuration Package
+
+Shared JWT configuration and validation utilities for Kyros SaaS PoC.
+
+## Overview
+
+This package provides:
+- JWT configuration constants (secret, algorithm, expiry times)
+- Pydantic models for user and tenant tokens
+- Token encoding and validation functions
+- Mock user data for PoC testing
+
+All Python applications (FastAPI, Dash apps) import from this package to ensure consistent JWT handling and prevent configuration drift.
+
+## Installation
+
+Install in editable mode for development:
+
+```bash
+pip install -e packages/shared-config
+```
+
+Or add to requirements.txt:
+
+```
+-e ../../packages/shared-config
+```
+
+## Usage
+
+### Import Configuration
+
+```python
+from shared_config import JWT_SECRET_KEY, JWT_ALGORITHM, JWT_ISSUER
+```
+
+### Validate Tokens
+
+```python
+from shared_config import validate_tenant_token
+
+try:
+    token_data = validate_tenant_token(token_string)
+    print(f"User: {token_data.email}, Tenant: {token_data.tenant_id}")
+except ValueError as e:
+    print(f"Invalid token: {e}")
+```
+
+### Encode Tokens
+
+```python
+from shared_config import encode_tenant_token
+
+token = encode_tenant_token({
+    "user_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    "email": "admin@acme.com",
+    "tenant_id": "8e1b3d5b-7c9a-4e2f-b1d3-a5c7e9f12345",
+    "role": "admin"
+})
+```
+
+### Mock Users
+
+```python
+from shared_config import MOCK_USERS, get_user_by_email
+
+user = get_user_by_email("admin@acme.com")
+print(user["tenant_ids"])  # List of accessible tenant IDs
+```
+
+## Mock User Credentials
+
+| Email | Password | Tenant Access | Role |
+|-------|----------|---------------|------|
+| analyst@acme.com | demo123 | Acme only | viewer |
+| admin@acme.com | demo123 | Acme, Beta | admin |
+| viewer@beta.com | demo123 | Beta only | viewer |
+
+## Security Warning
+
+⚠️ **This is a PoC implementation only!**
+
+- JWT secret is hardcoded
+- Passwords stored in plaintext
+- No password hashing
+- No token refresh mechanism
+
+**DO NOT use in production!** MVP must implement:
+- Environment-based secret management
+- Proper password hashing (bcrypt, Argon2)
+- Token refresh flows
+- Azure AD B2C or similar OIDC provider
+
+## Development
+
+### Run Tests
+
+```bash
+pytest packages/shared-config/tests/ -v
+```
+
+### Type Checking
+
+```bash
+mypy packages/shared-config/src/
+```
+
+## License
+
+UNLICENSED - Internal PoC Only

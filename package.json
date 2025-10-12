@@ -1,0 +1,32 @@
+{
+  "name": "kyros-saas-poc",
+  "version": "1.0.0",
+  "description": "Multi-tenant dashboard platform with JWT-based tenant isolation",
+  "private": true,
+  "workspaces": [
+    "apps/shell-ui"
+  ],
+  "scripts": {
+    "install": "npm install",
+    "build": "npm run build --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "lint:python": "ruff check apps/ packages/",
+    "dev": "npm run dev --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  },
+  "keywords": [
+    "multi-tenant",
+    "dashboard",
+    "jwt",
+    "fastapi",
+    "nextjs",
+    "plotly",
+    "dash"
+  ],
+  "author": "Kyros Team",
+  "license": "UNLICENSED"
+}

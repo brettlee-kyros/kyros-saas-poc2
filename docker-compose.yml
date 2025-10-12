@@ -1,0 +1,95 @@
+services:
+  # ============================================================================
+  # FastAPI Backend Service
+  # ============================================================================
+  api:
+    build:
+      context: ./apps/api
+      dockerfile: Dockerfile
+    container_name: kyros-api
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_PATH=/app/data/tenant_metadata.db
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY:-kyros-poc-secret-key-CHANGE-IN-PRODUCTION-12345678}
+    volumes:
+      - ./data:/app/data
+      - ./packages/shared-config:/app/packages/shared-config
+    networks:
+      - kyros-net
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # ============================================================================
+  # Next.js Shell UI Service
+  # ============================================================================
+  shell-ui:
+    build:
+      context: ./apps/shell-ui
+      dockerfile: Dockerfile
+    container_name: kyros-shell-ui
+    ports:
+      - "3000:3000"
+    environment:
+      - API_BASE_URL=http://api:8000
+      - NODE_ENV=production
+    depends_on:
+      - api
+    networks:
+      - kyros-net
+    restart: unless-stopped
+
+  # ============================================================================
+  # Dash App: Customer Lifetime Value
+  # ============================================================================
+  dash-app-clv:
+    build:
+      context: ./apps/dash-app-clv
+      dockerfile: Dockerfile
+    container_name: kyros-dash-clv
+    ports:
+      - "8050:8050"
+    environment:
+      - API_BASE_URL=http://api:8000
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY:-kyros-poc-secret-key-CHANGE-IN-PRODUCTION-12345678}
+    volumes:
+      - ./packages/shared-config:/app/packages/shared-config
+    depends_on:
+      - api
+    networks:
+      - kyros-net
+    restart: unless-stopped
+
+  # ============================================================================
+  # Dash App: Risk Analysis
+  # ============================================================================
+  dash-app-risk:
+    build:
+      context: ./apps/dash-app-risk
+      dockerfile: Dockerfile
+    container_name: kyros-dash-risk
+    ports:
+      - "8051:8051"
+    environment:
+      - API_BASE_URL=http://api:8000
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY:-kyros-poc-secret-key-CHANGE-IN-PRODUCTION-12345678}
+    volumes:
+      - ./packages/shared-config:/app/packages/shared-config
+    depends_on:
+      - api
+    networks:
+      - kyros-net
+    restart: unless-stopped
+
+# ==============================================================================
+# Networks
+# ==============================================================================
+networks:
+  kyros-net:
+    driver: bridge
+    name: kyros-net

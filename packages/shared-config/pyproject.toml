@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "shared-config"
+version = "0.1.0"
+description = "Shared JWT configuration and validation for Kyros SaaS PoC"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "PyJWT==2.8.0",
+    "pydantic==2.5.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.0",
+    "pytest-asyncio>=0.24.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+shared_config = ["py.typed"]
