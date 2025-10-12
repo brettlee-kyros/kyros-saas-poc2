@@ -32,7 +32,15 @@
       "Bash(rm:*)",
       "Bash(test-venv/bin/pytest:*)",
       "Bash(curl:*)",
-      "Bash(npm install)"
+      "Bash(npm install)",
+      "Bash(for:*)",
+      "Bash(done)",
+      "Bash(head:*)",
+      "Bash(test-venv/bin/pip install PyJWT httpx pytest pytest-asyncio -q)",
+      "Bash(sqlite3:*)",
+      "Read(//private/tmp/**)",
+      "Bash(cat:*)",
+      "Bash(TOKEN=\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmOGQxZTJjMy00YjVhLTY3ODktYWJjZC1lZjEyMzQ1Njc4OTAiLCJlbWFpbCI6ImFuYWx5c3RAYWNtZS5jb20iLCJ0ZW5hbnRfaWRzIjpbIjhlMWIzZDViLTdjOWEtNGUyZi1iMWQzLWE1YzdlOWYxMjM0NSJdLCJpYXQiOjE3NjAyMzc4NzgsImV4cCI6MTc2MDI0MTQ3OCwiaXNzIjoia3lyb3MtcG9jIn0.HSUI8pR7Rz8HjcVtsRMry9enSUWKHtxl38Lp6LNIl5o\")"
     ],
     "deny": [],
     "ask": []

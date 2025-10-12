@@ -16,7 +16,7 @@ except ImportError:
     SHARED_CONFIG_LOADED = False
 
 from .config import settings
-from .routers import health
+from .routers import health, auth, user, token, tenant_routes
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -42,6 +42,10 @@ app.add_middleware(
 
 # Include routers
 app.include_router(health.router, tags=["System"])
+app.include_router(auth.router)
+app.include_router(user.router)
+app.include_router(token.router)
+app.include_router(tenant_routes.router)
 
 
 @app.on_event("startup")
