@@ -40,7 +40,12 @@
       "Bash(sqlite3:*)",
       "Read(//private/tmp/**)",
       "Bash(cat:*)",
-      "Bash(TOKEN=\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmOGQxZTJjMy00YjVhLTY3ODktYWJjZC1lZjEyMzQ1Njc4OTAiLCJlbWFpbCI6ImFuYWx5c3RAYWNtZS5jb20iLCJ0ZW5hbnRfaWRzIjpbIjhlMWIzZDViLTdjOWEtNGUyZi1iMWQzLWE1YzdlOWYxMjM0NSJdLCJpYXQiOjE3NjAyMzc4NzgsImV4cCI6MTc2MDI0MTQ3OCwiaXNzIjoia3lyb3MtcG9jIn0.HSUI8pR7Rz8HjcVtsRMry9enSUWKHtxl38Lp6LNIl5o\")"
+      "Bash(TOKEN=\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmOGQxZTJjMy00YjVhLTY3ODktYWJjZC1lZjEyMzQ1Njc4OTAiLCJlbWFpbCI6ImFuYWx5c3RAYWNtZS5jb20iLCJ0ZW5hbnRfaWRzIjpbIjhlMWIzZDViLTdjOWEtNGUyZi1iMWQzLWE1YzdlOWYxMjM0NSJdLCJpYXQiOjE3NjAyMzc4NzgsImV4cCI6MTc2MDI0MTQ3OCwiaXNzIjoia3lyb3MtcG9jIn0.HSUI8pR7Rz8HjcVtsRMry9enSUWKHtxl38Lp6LNIl5o\")",
+      "Bash(test-venv/bin/pip install:*)",
+      "Bash(do echo \"=== $file ===\")",
+      "Bash(DATABASE_PATH=\"/Users/brettlee/docker/kyros-dev/work/kyros-saas-poc/data/tenant_metadata.db\" /Users/brettlee/docker/kyros-dev/work/kyros-saas-poc/apps/api/test-venv/bin/pytest:*)",
+      "Bash(find:*)",
+      "Bash(npm install:*)"
     ],
     "deny": [],
     "ask": []

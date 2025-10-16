@@ -32,6 +32,8 @@ services:
     build:
       context: ./apps/shell-ui
       dockerfile: Dockerfile
+      args:
+        - API_BASE_URL=http://api:8000
     container_name: kyros-shell-ui
     ports:
       - "3000:3000"
