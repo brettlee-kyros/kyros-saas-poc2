@@ -5,7 +5,7 @@ from pydantic import BaseModel
 
 class TenantInfo(BaseModel):
     """Tenant information for user profile response."""
-    id: str
+    tenant_id: str
     name: str
     slug: str
     role: str

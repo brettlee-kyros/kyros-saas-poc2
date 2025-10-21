@@ -1,0 +1,561 @@
+
+.block.card.ddk-card {
+    margin: 5px !important; 
+    padding: 5px !important; 
+    width : calc(100% - 10px) !important;
+}
+
+.responsive-icon svg {
+    height: clamp(5px, 2vw, 30px);
+    width: auto;
+}
+
+ 
+.info-box {
+    margin-top: 8px;
+    text-align: center !important;
+    flex-direction: column;   /* Corrected to use 'flex-direction' (hyphenated) */
+    justify-content: center !important;    
+    align-items: center !important;       /* Removed duplicate 'align-items' */
+    height: 60%;       
+    box-shadow: 1px 4px 6px rgba(0, 0, 0, 0.1); /* Consistent box shadow */
+    border-radius: 6px;
+    border-width: 0px;
+    background-color: #F9F9F9;
+}
+
+
+.row.ddk-row {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+
+#bubbler > * {
+    height: 100% !important;
+}
+
+#exposure-row > * {
+    height: 100% !important;
+}
+
+
+.tab, .tab--selected {
+    max-height: 7vh !important;
+    height: 100% !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+}
+
+
+
+/* Compact Accordion Styles */
+.accordion-button {
+    padding: 0.5rem 1.25rem;
+    min-height: 2rem;
+    transition: background-color 0.3s;
+    background-color: transparent;
+    color: inherit;
+}
+
+/* Style for collapsed and non-collapsed accordion buttons */
+.accordion-button,
+.accordion-button.collapsed,
+.accordion-button:not(.collapsed) {
+    background-color: transparent;
+}
+
+/* Remove box-shadow when accordion is opened */
+.accordion-button:not(.collapsed) {
+    box-shadow: none;
+}
+
+/* Remove focus outline */
+.accordion-button:focus {
+    box-shadow: none;
+}
+
+/* Remove borders from accordion items */
+.accordion-item {
+    border: none;
+}
+
+/* Reduce padding in accordion body */
+.accordion-body {
+    padding-bottom: 0;
+    padding-top: 0;
+    padding-left: 0.5rem;
+    padding-right: 0;
+}
+
+/* Style for icons */
+.accordion-button svg,
+.custom-button svg {
+    color: #4a4a4a;  /* Dark gray for icons */
+    margin-right: 0.5rem;
+}
+
+/* Compact styling for buttons representing files */
+.btn-link.custom-button {
+    padding: 0 0 2px 20px;
+    font-size: 0.9rem;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 2px;
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-decoration: none;  /* Remove underline */
+}
+
+/* Hover effects for all levels */
+.accordion-button:hover,
+.btn-link.custom-button:hover {
+    background-color: #f1f3f5;
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Reduce overall accordion padding */
+.accordion {
+    padding: 0 0;
+}
+
+/* Style accordion arrow */
+.accordion-button::after {
+    flex-shrink: 0;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-left: auto;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1.25rem;
+    transition: transform .2s ease-in-out;
+}
+
+.accordion-button:not(.collapsed)::after {
+    transform: rotate(-180deg);
+}
+
+/* Remove outline on focus for custom buttons */
+.btn-link.custom-button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Ensure smooth transition for all buttons */
+.btn {
+    transition: all 0.3s ease;
+}
+
+/* Override Bootstrap's default hover behavior for btn-link */
+.btn-link:hover {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Adjust spacing between icon and text */
+.accordion-button > div > span:last-child,
+.custom-button > span:last-child {
+    margin-left: 0;  /* Consistent with the inline style */
+}
+
+.text-start.custom-button {
+    font-size: 0.9rem; 
+    padding-left: 20px;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+/* Style for buttons when clicked or focused */
+.btn-link.custom-button:active,
+.btn-link.custom-button:focus {
+    background-color: #e6f3ff !important;  /* Light blue background */
+    color: inherit;
+    text-decoration: none;
+    outline: none;
+    box-shadow: none;
+}
+
+/* Hover effect for buttons */
+.btn-link.custom-button:hover {
+    background-color: #f1f3f5;
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Ensure smooth transition for background color changes */
+.btn-link.custom-button {
+    transition: background-color 0.3s ease;
+}
+
+.offcanvas-body {
+    padding: 0;
+}
+
+.offcanvas-header {
+    padding: 8px;
+}
+
+
+.offcanvas-header {
+    display: none;
+}
+
+
+.custom-xs-button {
+    line-height: 1;
+    min-height: 20px;
+    min-width: 20px;
+}
+
+
+.notification-store {
+          z-index: 1200 !important; /* Between the backdrop and your component */
+}
+
+.ddk-container.ddk-container .Select-arrow-zone {
+    margin-right: 0.2rem !important;
+}
+
+.Select-multi-value-wrapper {
+    display: block !important;
+    max-height: 40px !important;
+    overflow-y: auto !important;
+}
+.Select-multi-value-wrapper::-webkit-scrollbar-thumb {
+    background: transparent !important;  /* color of the scroll thumb */
+    border-radius: 5px;  /* roundness of the scroll thumb */
+}
+
+.ddk-container .control {
+    display: flex;
+    align-items: center;
+    padding: 5px !important;
+}
+
+.custom-dropdown .Select-input {
+    height: 14px;
+    font-size: 16px;  
+}
+
+.custom-dropdown .Select-control {
+    height: 14px;
+    font-size: 16px;   
+}
+
+
+.custom-dropdown .Select-menu-outer {
+    font-size: 16px; 
+}
+
+.custom-dropdown .Select-value-label {
+    font-size: 16px; 
+}
+
+
+.custom-dropdown .Select-placeholder, 
+.custom-dropdown .Select-control,
+.custom-dropdown .Select--single > .Select-control .Select-value,
+.custom-dropdown .Select-input {
+    height: 20px !important;  /* Increased from 14px for better usability */
+    min-height: 20px !important;
+    line-height: 30px !important;
+    font-size: 12px !important;  /* Reduced from 14px */
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+
+
+.ddk-container .expandToFull svg, .ddk-container .copyText svg {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+.ddk-container .block.card.ddk-card .card-header, .ddk-container .block.card.ddk-card .control-below  {
+    height: 35px !important;
+    min-height: 35px !important;
+    padding-right: 0.5rem !important;
+    padding-left: 0.5rem !important;
+    padding-top: 0 !important;
+    padding-bottom: 0.3rem !important;
+
+
+}
+
+/*----------------*/
+#menu-closed,
+#menu-items-container,
+.tab-parent,
+.tab-container {
+    height: 100% !important;
+    display: flex;
+    flex-direction: column; /* Ensure children align vertically */
+    align-items: center;
+    justify-content: center; /* Center items vertically within each parent */
+}
+
+.tab,
+.tab--selected {
+    height: 100% !important;
+    line-height: normal !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 10px 10px !important; /* Increase horizontal padding for wider tabs */
+    margin: 0 !important;
+    box-sizing: border-box;   
+    font-size: 16px; 
+    border-radius: 8px; 
+    min-width: 65px;  /* Set a minimum width for the tabs */
+}
+
+.tab span,
+.tab--selected span {
+    line-height: 1.2 !important;
+    display: block !important;
+    margin: 0 !important;
+}
+.tab span,
+.tab--selected span {
+    line-height: 100% !important;
+    display: block !important;
+    margin: 0 !important;       /* Ensure no margin is added */
+}
+  
+
+.welcoming-row {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  height: auto !important;
+  padding: 100px !important;
+  text-align: center !important;
+  position: relative !important;
+}
+
+.welcoming-logo {
+  max-width: 80% !important;
+  max-height: 80% !important;
+  margin: auto !important;
+  position: relative !important;
+  opacity: 0.05 !important;
+}
+
+.custom-radio-group label:has(input[type="radio"]:disabled) {
+    color: #999999 !important;
+    cursor: not-allowed !important;
+}
+
+.custom-radio-group input[type="radio"] {
+    transform: scale(0.7); /* Adjust the scale factor to make it smaller */
+}
+
+.custom-radio-group label {
+    display: block;
+    font-size: 14px; /* Adjust the font size as needed */
+    line-height: 0.9;
+}
+
+.ddk-container .controls label {
+    font-size: 0.8em !important; 
+}
+
+.ddk-container .controls label {
+    padding: 0.15em !important
+}
+
+.date-filter-text {
+    font-size: 0.75em !important; 
+    color: grey !important;
+}
+
+:where([data-mantine-color-scheme='light']) .m_44da308b {
+    background-color: #6CB4EE !important;
+    border: 1.4px solid #d3d3d3; /* Adds a 1px light grey border */
+
+}
+
+/* Custom Accordion Styles */
+.custom-accordion .accordion-button {
+    padding: 0.25rem 1rem !important;
+    min-height: 0px !important;
+    font-size: 0.85rem !important;
+}
+
+.custom-accordion .accordion-body {
+    padding: 0.25rem 0.5rem !important;
+
+}
+
+.custom-accordion .accordion-button:hover {
+    background-color: #f8f9fa !important;
+    border-radius: 0 !important;
+
+}
+
+.custom-accordion .accordion-button:not(.collapsed) {
+    background-color: #e7f1ff !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+}
+
+.custom-accordion .accordion-button::after {
+    width: 0.8rem !important;
+    height: 0.8rem !important;
+    background-size: 0.8rem !important;
+    border-radius: 0!important;
+
+}
+
+#clusters-tooltip .tooltip-inner {
+    max-height: 500px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 8 !important;
+    /* Also define the standard property 'line-clamp' for compatibility */
+    line-clamp: 8 !important;
+    white-space: normal !important;
+    line-height: 1.4 !important;
+}
+/* Custom Checklist Styles */
+.custom-checklist .form-check {
+    margin: 0 !important;
+    padding: 2px 0 !important;
+    min-height: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.custom-checklist .form-check-input {
+    all: unset !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    background-color: white !important;
+    margin: 0 !important;
+    border: 1px solid #dee2e6 !important;
+    width: 0.9rem !important;
+    height: 0.9rem !important;
+    border-radius: 0.25rem !important;
+    display: inline-block !important;
+    position: relative !important;
+    cursor: pointer !important;
+    vertical-align: middle !important;
+}
+
+.custom-checklist .form-check-input:checked {
+    background-color: rgb(22, 135, 255) !important;
+    border-color: #0d6efd !important;
+}
+
+.custom-checklist .form-check-input:checked::before {
+    content: '' !important;
+    position: absolute !important;
+    width: 0.9rem !important;
+    height: 0.9rem !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/%3e%3c/svg%3e") !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: 60% !important;
+}
+
+.custom-checklist .form-check-label {
+    font-size: 0.8rem !important;
+    margin-left: 0.5rem !important;
+}
+
+/* Focus state */
+.custom-checklist .form-check-input:focus {
+    box-shadow: 0 0 0 0.25rem rgba(40, 167, 69, 0.25) !important;  /* Green shadow */
+}
+
+.accordion-header .accordion-collapse collapse{
+        border-radius: 0 !important;
+
+}
+
+#manual-dim-content {
+    margin-top: 0.75rem !important;
+}
+
+
+.btn:focus, .btn.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0 white !important;
+}
+
+.ddk-container ::-webkit-scrollbar {
+    width: 0.5rem !important;
+    height: 0.5rem !important;  /* Controls horizontal scrollbar height */
+
+}
+
+
+.ag-body-horizontal-scroll.ag-scrollbar-invisible.ag-apple-scrollbar,
+.ag-body-vertical-scroll.ag-scrollbar-invisible.ag-apple-scrollbar {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.ag-root:hover .ag-body-horizontal-scroll.ag-scrollbar-invisible.ag-apple-scrollbar,
+.ag-root:hover .ag-body-vertical-scroll.ag-scrollbar-invisible.ag-apple-scrollbar {
+    opacity: 0.8;
+    visibility: visible;
+}
+
+
+.ag-header-cell {
+    font-size: 13px;
+    font-weight: bold;
+    background-color: #f8f9fa;
+}
+
+
+.ag-theme-balham, .ag-theme-balham-dark, .ag-theme-balham-auto-dark {
+    --ag-row-hover-color: transparent !important; /* Disable default hover background */
+}
+
+.ag-theme-balham .ag-row:nth-child(even) {
+    background-color: rgb(247, 247, 247) ;
+}
+
+.ag-theme-balham .ag-row:nth-child(odd) {
+    background-color: rgb(247, 247, 247);
+}
+    
+.ag-theme-balham .ag-row-hover {
+    border: 1px solid #ddd !important; /* Add a light border on hover */
+  }
+
+.ag-theme-balham .ag-row-selected {
+    background-color: transparent !important;
+    border-left: 4px solid #8e99a3 !important;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    font-weight: bold; /* Make selected row text bold */
+}
+
+.ag-theme-balham {
+    --ag-selected-row-background-color: transparent;
+}
+
+.btn-extra-small {
+    font-size: 0.5rem !important;         /* Smaller font size */
+    padding: 0.25rem 0.35rem !important;    /* Smaller padding */
+    line-height: 0.9 !important;             /* Adjust line-height if needed */
+    border-radius: 0.2rem !important;      /* Adjust to taste */
+  }
+
+
+
+  

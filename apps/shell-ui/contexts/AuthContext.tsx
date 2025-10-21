@@ -1,13 +1,24 @@
 'use client'
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+import type { Tenant } from '@/types/tenant'
+
+// User interface
+export interface User {
+  user_id?: string
+  email: string
+  name?: string
+  tenants?: Tenant[]
+}
 
 // AuthContextType interface (AC 1, AC 10)
 export interface AuthContextType {
   isAuthenticated: boolean
   userToken: string | null
+  user: User | null
   login: (token: string) => void
   logout: () => void
+  setUser: (user: User | null) => void
 }
 
 // Create AuthContext with default undefined value
@@ -20,6 +31,7 @@ interface AuthProviderProps {
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [userToken, setUserToken] = useState<string | null>(null)
+  const [user, setUser] = useState<User | null>(null)
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
 
   // Token persistence check on mount (AC 9)
@@ -58,16 +70,20 @@ export function AuthProvider({ children }: AuthProviderProps) {
   // logout() function (AC 5)
   const logout = () => {
     setUserToken(null)
+    setUser(null)
     setIsAuthenticated(false)
     // Clear from sessionStorage
     sessionStorage.removeItem('user_token')
+    sessionStorage.removeItem('tenant_token')
   }
 
   const value: AuthContextType = {
     isAuthenticated,
     userToken,
+    user,
     login,
     logout,
+    setUser,
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

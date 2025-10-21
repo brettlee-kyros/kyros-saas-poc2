@@ -1,0 +1,62 @@
+{
+  "mockLoginSuccess": {
+    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmOGQxZTJjMy00YjVhLTY3ODktYWJjZC1lZjEyMzQ1Njc4OTAiLCJlbWFpbCI6ImFuYWx5c3RAYWNtZS5jb20iLCJ0ZW5hbnRfaWRzIjpbIjhlMWIzZDViLTdjOWEtNGUyZi1iMWQzLWE1YzdlOWYxMjM0NSJdLCJpYXQiOjE2OTg3NjU0MzIsImV4cCI6MTY5ODc2OTAzMiwiaXNzIjoia3lyb3MtcG9jIn0.mock-signature",
+    "token_type": "Bearer",
+    "expires_in": 3600
+  },
+  "mockLoginNotFound": {
+    "detail": {
+      "error": {
+        "code": "USER_NOT_FOUND",
+        "message": "User not found",
+        "timestamp": "2025-10-18T12:00:00Z",
+        "request_id": "test-request-id"
+      }
+    }
+  },
+  "mockUserInfo": {
+    "user_id": "f8d1e2c3-4b5a-6789-abcd-ef1234567890",
+    "email": "analyst@acme.com",
+    "tenants": [
+      {
+        "tenant_id": "8e1b3d5b-7c9a-4e2f-b1d3-a5c7e9f12345",
+        "name": "Acme Corporation",
+        "slug": "acme",
+        "config_json": {
+          "branding": {
+            "primary_color": "#3B82F6"
+          }
+        }
+      }
+    ]
+  },
+  "mockTokenExchange": {
+    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmOGQxZTJjMy00YjVhLTY3ODktYWJjZC1lZjEyMzQ1Njc4OTAiLCJlbWFpbCI6ImFuYWx5c3RAYWNtZS5jb20iLCJ0ZW5hbnRfaWQiOiI4ZTFiM2Q1Yi03YzlhLTRlMmYtYjFkMy1hNWM3ZTlmMTIzNDUiLCJyb2xlIjoidmlld2VyIiwiaWF0IjoxNjk4NzY1NTAwLCJleHAiOjE2OTg3NjczMDAsImlzcyI6Imt5cm9zLXBvYyJ9.mock-signature",
+    "token_type": "Bearer",
+    "expires_in": 1800
+  },
+  "mockDashboards": {
+    "tenant_id": "8e1b3d5b-7c9a-4e2f-b1d3-a5c7e9f12345",
+    "tenant_name": "Acme Corporation",
+    "dashboards": [
+      {
+        "dashboard_id": "d1",
+        "name": "Customer Lifetime Value",
+        "slug": "customer-lifetime-value",
+        "description": "Analyze customer value over time",
+        "framework": "dash",
+        "entry_point": "/dashboards/clv_dashboard.py",
+        "config_json": {}
+      },
+      {
+        "dashboard_id": "d2",
+        "name": "Risk Analysis",
+        "slug": "risk-analysis",
+        "description": "Risk assessment dashboard",
+        "framework": "streamlit",
+        "entry_point": "/dashboards/risk_dashboard.py",
+        "config_json": {}
+      }
+    ]
+  }
+}

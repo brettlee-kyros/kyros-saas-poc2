@@ -1,0 +1,110 @@
+<testsuites id="" name="" tests="25" failures="0" skipped="25" errors="0" time="0.10208100000000002">
+<testsuite name="3.1-login.spec.ts" timestamp="2025-10-19T16:23:07.662Z" hostname="chromium" tests="10" failures="0" skipped="10" time="0" errors="0">
+<testcase name="Story 3.1: Login Page with Mock Authentication › TC-3.1.1 - Login page is accessible at /login route" classname="3.1-login.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Story 3.1: Login Page with Mock Authentication › TC-3.1.2 - Login form UI elements are present and styled" classname="3.1-login.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Story 3.1: Login Page with Mock Authentication › TC-3.1.3 - Mock email suggestions populate input correctly" classname="3.1-login.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Story 3.1: Login Page with Mock Authentication › TC-3.1.4 - Valid login with analyst@acme.com succeeds" classname="3.1-login.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Story 3.1: Login Page with Mock Authentication › TC-3.1.5 - Valid login with admin@acme.com succeeds" classname="3.1-login.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Story 3.1: Login Page with Mock Authentication › TC-3.1.6 - Valid login with viewer@beta.com succeeds" classname="3.1-login.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Story 3.1: Login Page with Mock Authentication › TC-3.1.7 - Invalid user displays &quot;User not found&quot; error" classname="3.1-login.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Story 3.1: Login Page with Mock Authentication › TC-3.1.8 - Network error displays error message with retry option" classname="3.1-login.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Story 3.1: Login Page with Mock Authentication › TC-3.1.10 - Invalid email format triggers validation" classname="3.1-login.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Story 3.1: Login Page with Mock Authentication › TC-3.1.11 - Empty email field prevents submission" classname="3.1-login.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="6.4-auth-flow.spec.ts" timestamp="2025-10-19T16:23:07.662Z" hostname="chromium" tests="4" failures="0" skipped="4" time="0" errors="0">
+<testcase name="Story 6.4: Authentication Flow E2E Tests › TC-6.4.1 - Single-tenant user complete flow (analyst@acme.com)" classname="6.4-auth-flow.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Story 6.4: Authentication Flow E2E Tests › TC-6.4.2 - Multi-tenant user workflow (admin@acme.com)" classname="6.4-auth-flow.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Story 6.4: Authentication Flow E2E Tests › TC-6.4.3 - Dashboard view loads successfully" classname="6.4-auth-flow.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Story 6.4: Authentication Flow E2E Tests › TC-6.4.4 - JWT claims displayed correctly in debug panel" classname="6.4-auth-flow.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="6.4-security-isolation.spec.ts" timestamp="2025-10-19T16:23:07.662Z" hostname="chromium" tests="7" failures="0" skipped="7" time="0" errors="0">
+<testcase name="Story 6.4: Security and Tenant Isolation E2E Tests › TC-6.4.9 - Unauthorized tenant access returns 403" classname="6.4-security-isolation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Story 6.4: Security and Tenant Isolation E2E Tests › TC-6.4.10 - Tampered JWT rejected with 401" classname="6.4-security-isolation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Story 6.4: Security and Tenant Isolation E2E Tests › TC-6.4.11 - Cross-tenant data access prevented" classname="6.4-security-isolation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Story 6.4: Security and Tenant Isolation E2E Tests › TC-6.4.12 - Dashboard data filtered by tenant_id" classname="6.4-security-isolation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Story 6.4: Security and Tenant Isolation E2E Tests › TC-6.4.13 - Unauthenticated access redirects to login" classname="6.4-security-isolation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Story 6.4: Security and Tenant Isolation E2E Tests › TC-6.4.14 - API endpoints require authentication" classname="6.4-security-isolation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Story 6.4: Security and Tenant Isolation E2E Tests › TC-6.4.15 - Tokens not exposed in URL" classname="6.4-security-isolation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="6.4-token-expiry.spec.ts" timestamp="2025-10-19T16:23:07.662Z" hostname="chromium" tests="4" failures="0" skipped="4" time="0" errors="0">
+<testcase name="Story 6.4: Token Expiry E2E Tests › TC-6.4.5 - Expired token redirects to login" classname="6.4-token-expiry.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Story 6.4: Token Expiry E2E Tests › TC-6.4.6 - API calls with expired token return 401" classname="6.4-token-expiry.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Story 6.4: Token Expiry E2E Tests › TC-6.4.7 - User can re-authenticate after token expiry" classname="6.4-token-expiry.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Story 6.4: Token Expiry E2E Tests › TC-6.4.8 - Valid token persists across page reloads" classname="6.4-token-expiry.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+</testsuites>

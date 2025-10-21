@@ -1,0 +1,7 @@
+[build]
+  [[build.env]]
+    name = 'BP_CPYTHON_VERSION'
+    value = '3.10.*'
+  [[build.env]]
+    name = 'BP_PIP_VERSION'
+    value = '23.3.1'

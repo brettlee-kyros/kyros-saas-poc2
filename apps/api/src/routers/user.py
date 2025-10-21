@@ -112,7 +112,7 @@ async def get_user_info(
     # Transform tenant data into Pydantic models
     tenants = [
         TenantInfo(
-            id=t["id"],
+            tenant_id=t["id"],
             name=t["name"],
             slug=t["slug"],
             role=t["role"],

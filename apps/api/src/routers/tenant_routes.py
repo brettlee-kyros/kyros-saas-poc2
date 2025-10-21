@@ -108,7 +108,6 @@ async def get_tenant_metadata(
 
 @router.get(
     "/{tenant_id}/dashboards",
-    response_model=List[DashboardInfo],
     status_code=status.HTTP_200_OK,
     tags=["Tenant"],
     summary="Get tenant's assigned dashboards",
@@ -120,7 +119,7 @@ async def get_tenant_metadata(
     **Tenant Isolation:** Token tenant_id must match path parameter tenant_id.
 
     **Response:**
-    Array of dashboard objects sorted alphabetically by title.
+    Object with dashboards array sorted alphabetically by title.
     Returns empty array if no dashboards assigned (not an error).
 
     **Dashboard fields:**
@@ -138,7 +137,7 @@ async def get_tenant_dashboards_list(
     tenant_id: str,
     tenant_context: Dict[str, Any] = Depends(get_current_tenant),
     _: None = Depends(validate_tenant_access)
-) -> List[DashboardInfo]:
+) -> Dict[str, Any]:
     """
     Get list of dashboards assigned to tenant.
 
@@ -148,7 +147,7 @@ async def get_tenant_dashboards_list(
         _: Tenant access validation
 
     Returns:
-        List of DashboardInfo objects sorted by title
+        Dict with dashboards array
 
     Raises:
         HTTPException: 403 if tenant_id mismatch (handled by validate_tenant_access)
@@ -171,4 +170,4 @@ async def get_tenant_dashboards_list(
         }
     )
 
-    return [DashboardInfo(**d) for d in dashboards]
+    return {"dashboards": [DashboardInfo(**d) for d in dashboards]}

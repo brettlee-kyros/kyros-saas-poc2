@@ -3,7 +3,8 @@
 import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/contexts/AuthContext'
-import type { LoginRequest, LoginResponse, ErrorResponse } from '@/types/auth'
+import { Box, TextField, Button, Typography, Container, Paper, Alert } from '@mui/material'
+import { Login as LoginIcon, Lock as LockIcon } from '@mui/icons-material'
 
 export default function LoginPage() {
   const router = useRouter()
@@ -11,16 +12,14 @@ export default function LoginPage() {
   const [email, setEmail] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const [showSuggestions, setShowSuggestions] = useState(false)
 
-  // Mock user emails from Story 3.1 AC 4
+  // Mock user emails
   const mockEmails = [
-    'analyst@acme.com',
-    'admin@acme.com',
-    'viewer@beta.com'
+    { email: 'analyst@acme.com', label: 'analyst@acme.com (Multi-tenant user)' },
+    { email: 'admin@acme.com', label: 'admin@acme.com (Admin user)' },
+    { email: 'viewer@beta.com', label: 'viewer@beta.com (Single-tenant user)' }
   ]
 
-  // Client-side email validation (AC 9)
   const validateEmail = (email: string): boolean => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     return emailRegex.test(email)
@@ -30,7 +29,6 @@ export default function LoginPage() {
     e.preventDefault()
     setError(null)
 
-    // Client-side validation (AC 9)
     if (!email.trim()) {
       setError('Email is required')
       return
@@ -44,171 +42,164 @@ export default function LoginPage() {
     setIsLoading(true)
 
     try {
-      // Call POST /api/auth/mock-login (AC 5)
       const response = await fetch('/api/auth/mock-login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email } as LoginRequest),
+        body: JSON.stringify({ email }),
       })
 
-      // Handle 404 - user not found (AC 7)
       if (response.status === 404) {
         setError('User not found. Try one of the suggested emails.')
         setIsLoading(false)
         return
       }
 
-      // Handle 401 - invalid credentials (AC 7)
-      if (response.status === 401) {
-        setError('Authentication failed. Please check your email.')
-        setIsLoading(false)
-        return
-      }
-
-      // Handle other errors (AC 8)
       if (!response.ok) {
-        const errorData: ErrorResponse = await response.json()
-        setError(errorData.detail?.error?.message || 'Authentication failed')
+        setError('Authentication failed. Please try again.')
         setIsLoading(false)
         return
       }
 
-      // Success - store token using auth context and redirect (AC 6)
-      const data: LoginResponse = await response.json()
-
-      // Use auth context login() function (Story 3.2)
+      const data = await response.json()
       login(data.access_token)
-
-      // Redirect to home page (AC 6)
       router.push('/')
     } catch (err) {
-      // Network error handling (AC 8)
       console.error('Login error:', err)
       setError('Network error. Please check your connection and retry.')
       setIsLoading(false)
     }
   }
 
-  const handleEmailClick = (selectedEmail: string) => {
-    setEmail(selectedEmail)
-    setShowSuggestions(false)
-    setError(null)
-  }
-
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 px-4">
-      <div className="w-full max-w-md">
-        {/* Login Card - Centered layout (AC 2, 11) */}
-        <div className="bg-white rounded-lg shadow-lg p-8">
-          {/* Header */}
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              Welcome to Kyros
-            </h1>
-            <p className="text-gray-600">
-              Multi-Tenant Dashboard PoC
-            </p>
-          </div>
+    <Box
+      sx={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        bgcolor: '#f5f7fa',
+      }}
+    >
+      <Container maxWidth="sm">
+        <Box sx={{ textAlign: 'center', mb: 4 }}>
+          {/* Logo Icon */}
+          <Box
+            sx={{
+              width: 80,
+              height: 80,
+              borderRadius: '50%',
+              bgcolor: 'primary.main',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: '0 auto',
+              mb: 3,
+            }}
+          >
+            <LoginIcon sx={{ fontSize: 40, color: 'white' }} />
+          </Box>
 
-          {/* Login Form (AC 1) */}
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Email Input Field (AC 2, 3) */}
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700 mb-2"
-              >
-                Email Address
-              </label>
-              <input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                onFocus={() => setShowSuggestions(true)}
-                placeholder="analyst@acme.com"
-                disabled={isLoading}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed transition-colors"
-                required
-              />
+          {/* Heading */}
+          <Typography variant="h3" component="h1" gutterBottom sx={{ fontWeight: 600, color: '#1a1a1a' }}>
+            Welcome to KYROS
+          </Typography>
+          <Typography variant="body1" color="text.secondary">
+            Sign in to access your analytics dashboard
+          </Typography>
+        </Box>
 
-              {/* Mock Email Suggestions (AC 4) */}
-              {showSuggestions && !isLoading && (
-                <div className="mt-2 bg-blue-50 border border-blue-200 rounded-md p-3">
-                  <p className="text-xs text-blue-800 font-semibold mb-2">
-                    Mock Users (for PoC):
-                  </p>
-                  <div className="space-y-1">
-                    {mockEmails.map((mockEmail) => (
-                      <button
-                        key={mockEmail}
-                        type="button"
-                        onClick={() => handleEmailClick(mockEmail)}
-                        className="block w-full text-left px-3 py-2 text-sm text-blue-700 hover:bg-blue-100 rounded transition-colors"
-                      >
-                        {mockEmail}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
+        <Paper elevation={0} sx={{ p: 4, borderRadius: 2, border: '1px solid #e0e0e0' }}>
+          <form onSubmit={handleSubmit}>
+            {/* Email Input */}
+            <Typography variant="body2" sx={{ mb: 1, fontWeight: 500, color: '#555' }}>
+              Email Address
+            </Typography>
+            <TextField
+              fullWidth
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="analyst@acme.com"
+              disabled={isLoading}
+              sx={{ mb: 2 }}
+              variant="outlined"
+            />
 
-            {/* Error Message (AC 7, 8) */}
+            {/* Demo Environment Info Box */}
+            <Box
+              sx={{
+                bgcolor: '#e3f2fd',
+                border: '1px solid #90caf9',
+                borderRadius: 1,
+                p: 2,
+                mb: 3,
+              }}
+            >
+              <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 1 }}>
+                <LockIcon sx={{ fontSize: 20, color: 'primary.main', mr: 1, mt: 0.2 }} />
+                <Typography variant="subtitle2" sx={{ fontWeight: 600, color: 'primary.main' }}>
+                  Demo Environment
+                </Typography>
+              </Box>
+              <Typography variant="body2" sx={{ mb: 1, color: '#1976d2' }}>
+                This is a mock authentication system. Use any of the pre-configured emails:
+              </Typography>
+              <Box component="ul" sx={{ m: 0, pl: 2.5 }}>
+                {mockEmails.map((user) => (
+                  <li key={user.email}>
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color: 'primary.main',
+                        cursor: 'pointer',
+                        '&:hover': { textDecoration: 'underline' },
+                      }}
+                      onClick={() => setEmail(user.email)}
+                    >
+                      {user.label}
+                    </Typography>
+                  </li>
+                ))}
+              </Box>
+            </Box>
+
+            {/* Error Message */}
             {error && (
-              <div className="bg-red-50 border border-red-200 rounded-md p-3">
-                <p className="text-sm text-red-800">
-                  <span className="font-semibold">Error:</span> {error}
-                </p>
-              </div>
+              <Alert severity="error" sx={{ mb: 2 }}>
+                {error}
+              </Alert>
             )}
 
-            {/* Submit Button (AC 2, 3) */}
-            <button
+            {/* Submit Button */}
+            <Button
               type="submit"
+              fullWidth
+              variant="contained"
+              size="large"
               disabled={isLoading}
-              className="w-full bg-blue-600 text-white font-semibold py-3 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:bg-blue-400 disabled:cursor-not-allowed transition-colors"
+              startIcon={<LoginIcon />}
+              sx={{
+                py: 1.5,
+                fontSize: '1rem',
+                fontWeight: 500,
+                textTransform: 'none',
+              }}
             >
-              {isLoading ? (
-                <span className="flex items-center justify-center">
-                  <svg
-                    className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle
-                      className="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                    />
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                    />
-                  </svg>
-                  Authenticating...
-                </span>
-              ) : (
-                'Log In'
-              )}
-            </button>
+              {isLoading ? 'Signing in...' : 'Sign in with Azure AD B2C'}
+            </Button>
           </form>
 
-          {/* PoC Notice */}
-          <div className="mt-6 pt-6 border-t border-gray-200">
-            <p className="text-xs text-gray-500 text-center">
-              This is a PoC demonstration. Use one of the mock emails above to log in.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
+          {/* Footer */}
+          <Typography
+            variant="caption"
+            sx={{ display: 'block', textAlign: 'center', mt: 3, color: 'text.secondary' }}
+          >
+            © 2025 KYROS Analytics. All rights reserved.
+          </Typography>
+        </Paper>
+      </Container>
+    </Box>
   )
 }

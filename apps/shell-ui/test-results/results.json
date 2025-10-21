@@ -1,0 +1,717 @@
+{
+  "config": {
+    "configFile": "/Users/brettlee/docker/kyros-dev/work/kyros-saas-poc/apps/shell-ui/playwright.config.ts",
+    "rootDir": "/Users/brettlee/docker/kyros-dev/work/kyros-saas-poc/apps/shell-ui/e2e/tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {},
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "html",
+        {
+          "outputFolder": "playwright-report"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/results.json"
+        }
+      ],
+      [
+        "junit",
+        {
+          "outputFile": "test-results/junit.xml"
+        }
+      ],
+      [
+        "list",
+        null
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/Users/brettlee/docker/kyros-dev/work/kyros-saas-poc/apps/shell-ui/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/brettlee/docker/kyros-dev/work/kyros-saas-poc/apps/shell-ui/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/brettlee/docker/kyros-dev/work/kyros-saas-poc/apps/shell-ui/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "/Users/brettlee/docker/kyros-dev/work/kyros-saas-poc/apps/shell-ui/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/brettlee/docker/kyros-dev/work/kyros-saas-poc/apps/shell-ui/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "/Users/brettlee/docker/kyros-dev/work/kyros-saas-poc/apps/shell-ui/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/brettlee/docker/kyros-dev/work/kyros-saas-poc/apps/shell-ui/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "Mobile Chrome",
+        "name": "Mobile Chrome",
+        "testDir": "/Users/brettlee/docker/kyros-dev/work/kyros-saas-poc/apps/shell-ui/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/brettlee/docker/kyros-dev/work/kyros-saas-poc/apps/shell-ui/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "Mobile Safari",
+        "name": "Mobile Safari",
+        "testDir": "/Users/brettlee/docker/kyros-dev/work/kyros-saas-poc/apps/shell-ui/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 6,
+    "webServer": {
+      "command": "npm run dev",
+      "url": "http://localhost:3000",
+      "reuseExistingServer": true,
+      "timeout": 120000
+    }
+  },
+  "suites": [
+    {
+      "title": "3.1-login.spec.ts",
+      "file": "3.1-login.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Story 3.1: Login Page with Mock Authentication",
+          "file": "3.1-login.spec.ts",
+          "line": 14,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC-3.1.1 - Login page is accessible at /login route",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "49ffd60ed4d6a2012dbd-292b453203b139572dea",
+              "file": "3.1-login.spec.ts",
+              "line": 43,
+              "column": 7
+            },
+            {
+              "title": "TC-3.1.2 - Login form UI elements are present and styled",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "49ffd60ed4d6a2012dbd-ab285e69203d645db373",
+              "file": "3.1-login.spec.ts",
+              "line": 70,
+              "column": 7
+            },
+            {
+              "title": "TC-3.1.3 - Mock email suggestions populate input correctly",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "49ffd60ed4d6a2012dbd-88a06f0d5c9cc4f52d58",
+              "file": "3.1-login.spec.ts",
+              "line": 95,
+              "column": 7
+            },
+            {
+              "title": "TC-3.1.4 - Valid login with analyst@acme.com succeeds",
+              "ok": true,
+              "tags": [
+                "acme.com"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "49ffd60ed4d6a2012dbd-9bb2df73626d763eb3e4",
+              "file": "3.1-login.spec.ts",
+              "line": 117,
+              "column": 7
+            },
+            {
+              "title": "TC-3.1.5 - Valid login with admin@acme.com succeeds",
+              "ok": true,
+              "tags": [
+                "acme.com"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "49ffd60ed4d6a2012dbd-ac27b9b18f8d4f0b3042",
+              "file": "3.1-login.spec.ts",
+              "line": 151,
+              "column": 7
+            },
+            {
+              "title": "TC-3.1.6 - Valid login with viewer@beta.com succeeds",
+              "ok": true,
+              "tags": [
+                "beta.com"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "49ffd60ed4d6a2012dbd-ff475ebffd923b48b974",
+              "file": "3.1-login.spec.ts",
+              "line": 173,
+              "column": 7
+            },
+            {
+              "title": "TC-3.1.7 - Invalid user displays \"User not found\" error",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "49ffd60ed4d6a2012dbd-7b6591946d2021fe5119",
+              "file": "3.1-login.spec.ts",
+              "line": 194,
+              "column": 7
+            },
+            {
+              "title": "TC-3.1.8 - Network error displays error message with retry option",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "49ffd60ed4d6a2012dbd-2ec53af99679d3cf60e3",
+              "file": "3.1-login.spec.ts",
+              "line": 225,
+              "column": 7
+            },
+            {
+              "title": "TC-3.1.10 - Invalid email format triggers validation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "49ffd60ed4d6a2012dbd-b2445c16f44ec2c8d318",
+              "file": "3.1-login.spec.ts",
+              "line": 253,
+              "column": 7
+            },
+            {
+              "title": "TC-3.1.11 - Empty email field prevents submission",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "49ffd60ed4d6a2012dbd-71a974cd4cad3ba5db89",
+              "file": "3.1-login.spec.ts",
+              "line": 277,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "6.4-auth-flow.spec.ts",
+      "file": "6.4-auth-flow.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Story 6.4: Authentication Flow E2E Tests",
+          "file": "6.4-auth-flow.spec.ts",
+          "line": 17,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC-6.4.1 - Single-tenant user complete flow (analyst@acme.com)",
+              "ok": true,
+              "tags": [
+                "acme.com)"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "53410c354bfa2068fd97-dc3be2ed7ea31dc8eea6",
+              "file": "6.4-auth-flow.spec.ts",
+              "line": 44,
+              "column": 7
+            },
+            {
+              "title": "TC-6.4.2 - Multi-tenant user workflow (admin@acme.com)",
+              "ok": true,
+              "tags": [
+                "acme.com)"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "53410c354bfa2068fd97-33a320e3f0f81af9ea0e",
+              "file": "6.4-auth-flow.spec.ts",
+              "line": 87,
+              "column": 7
+            },
+            {
+              "title": "TC-6.4.3 - Dashboard view loads successfully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "53410c354bfa2068fd97-73f693e42065e5562692",
+              "file": "6.4-auth-flow.spec.ts",
+              "line": 136,
+              "column": 7
+            },
+            {
+              "title": "TC-6.4.4 - JWT claims displayed correctly in debug panel",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "53410c354bfa2068fd97-704e13347076b7337f73",
+              "file": "6.4-auth-flow.spec.ts",
+              "line": 177,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "6.4-security-isolation.spec.ts",
+      "file": "6.4-security-isolation.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Story 6.4: Security and Tenant Isolation E2E Tests",
+          "file": "6.4-security-isolation.spec.ts",
+          "line": 16,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC-6.4.9 - Unauthorized tenant access returns 403",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "5448f72cd5d9ccc33269-ab42f3d93238615911fc",
+              "file": "6.4-security-isolation.spec.ts",
+              "line": 41,
+              "column": 7
+            },
+            {
+              "title": "TC-6.4.10 - Tampered JWT rejected with 401",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "5448f72cd5d9ccc33269-a05a3e7ac3498c11eabd",
+              "file": "6.4-security-isolation.spec.ts",
+              "line": 88,
+              "column": 7
+            },
+            {
+              "title": "TC-6.4.11 - Cross-tenant data access prevented",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "5448f72cd5d9ccc33269-bdbf761b434248cdc6f3",
+              "file": "6.4-security-isolation.spec.ts",
+              "line": 125,
+              "column": 7
+            },
+            {
+              "title": "TC-6.4.12 - Dashboard data filtered by tenant_id",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "5448f72cd5d9ccc33269-5d7699d57ffe4800f42e",
+              "file": "6.4-security-isolation.spec.ts",
+              "line": 163,
+              "column": 7
+            },
+            {
+              "title": "TC-6.4.13 - Unauthenticated access redirects to login",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "5448f72cd5d9ccc33269-0fb17e1d3ec17698f380",
+              "file": "6.4-security-isolation.spec.ts",
+              "line": 210,
+              "column": 7
+            },
+            {
+              "title": "TC-6.4.14 - API endpoints require authentication",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "5448f72cd5d9ccc33269-8fd93afc808f15b3e1ee",
+              "file": "6.4-security-isolation.spec.ts",
+              "line": 232,
+              "column": 7
+            },
+            {
+              "title": "TC-6.4.15 - Tokens not exposed in URL",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "5448f72cd5d9ccc33269-384734148c647b593036",
+              "file": "6.4-security-isolation.spec.ts",
+              "line": 253,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "6.4-token-expiry.spec.ts",
+      "file": "6.4-token-expiry.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Story 6.4: Token Expiry E2E Tests",
+          "file": "6.4-token-expiry.spec.ts",
+          "line": 16,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC-6.4.5 - Expired token redirects to login",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "c66dcb013b1390d2f580-8aa09324e99051996b51",
+              "file": "6.4-token-expiry.spec.ts",
+              "line": 41,
+              "column": 7
+            },
+            {
+              "title": "TC-6.4.6 - API calls with expired token return 401",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "c66dcb013b1390d2f580-c3624ac2156948bfdd1d",
+              "file": "6.4-token-expiry.spec.ts",
+              "line": 94,
+              "column": 7
+            },
+            {
+              "title": "TC-6.4.7 - User can re-authenticate after token expiry",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "c66dcb013b1390d2f580-01f230ae48b9712c25f9",
+              "file": "6.4-token-expiry.spec.ts",
+              "line": 139,
+              "column": 7
+            },
+            {
+              "title": "TC-6.4.8 - Valid token persists across page reloads",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "c66dcb013b1390d2f580-126fa21fe956626da51d",
+              "file": "6.4-token-expiry.spec.ts",
+              "line": 185,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2025-10-19T16:23:07.561Z",
+    "duration": 102.08100000000002,
+    "expected": 0,
+    "skipped": 25,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

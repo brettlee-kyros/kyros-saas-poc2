@@ -17,6 +17,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application source
 COPY src/ /app/src/
 
+# Copy tests for pytest
+COPY tests/ /app/tests/
+COPY pytest.ini /app/pytest.ini
+
 # Expose port
 EXPOSE 8000
 

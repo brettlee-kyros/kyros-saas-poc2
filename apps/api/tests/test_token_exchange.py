@@ -9,6 +9,7 @@ from fastapi.testclient import TestClient
 
 # Add paths for imports
 sys.path.insert(0, '/app/packages/shared-config/src')
+sys.path.insert(0, '/app')
 
 from shared_config import (
     encode_user_token,
@@ -20,7 +21,7 @@ from shared_config import (
     get_user_by_email
 )
 
-from apps.api.src.main import app
+from src.main import app
 
 
 @pytest.fixture
@@ -32,7 +33,7 @@ def client():
 class TestTokenExchangeAccessValidation:
     """Unit tests for tenant access validation logic."""
 
-    @patch("apps.api.src.routers.token.get_user_tenant_role")
+    @patch("src.routers.token.get_user_tenant_role")
     def test_exchange_with_authorized_tenant(self, mock_get_role, client):
         """Test token exchange when tenant_id IS in user's tenant_ids array."""
         # Mock role query

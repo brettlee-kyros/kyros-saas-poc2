@@ -16,7 +16,8 @@ except ImportError:
     SHARED_CONFIG_LOADED = False
 
 from .config import settings
-from .routers import health, auth, user, token, tenant_routes
+from .routers import health, auth, user, token, tenant_routes, dashboards
+from .middleware.request_logging import RequestLoggingMiddleware
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -30,6 +31,9 @@ app = FastAPI(
     docs_url="/docs",
     redoc_url="/redoc"
 )
+
+# Add request logging middleware (before CORS)
+app.add_middleware(RequestLoggingMiddleware)
 
 # Configure CORS
 app.add_middleware(
@@ -46,6 +50,7 @@ app.include_router(auth.router)
 app.include_router(user.router)
 app.include_router(token.router)
 app.include_router(tenant_routes.router)
+app.include_router(dashboards.router)
 
 
 @app.on_event("startup")

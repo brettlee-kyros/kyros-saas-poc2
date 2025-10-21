@@ -1,0 +1,31 @@
+{
+  "analyst": {
+    "email": "analyst@acme.com",
+    "tenantCount": 1,
+    "tenants": ["Acme Corporation"],
+    "tenantSlug": "acme",
+    "expectedDashboards": 2,
+    "role": "Viewer",
+    "description": "Single-tenant user with viewer role"
+  },
+  "admin": {
+    "email": "admin@acme.com",
+    "tenantCount": 2,
+    "tenants": ["Acme Corporation", "Beta Industries"],
+    "expectedDashboards": {
+      "acme": 2,
+      "beta": 1
+    },
+    "role": "Admin",
+    "description": "Multi-tenant user with admin role"
+  },
+  "viewer": {
+    "email": "viewer@beta.com",
+    "tenantCount": 1,
+    "tenants": ["Beta Industries"],
+    "tenantSlug": "beta",
+    "expectedDashboards": 1,
+    "role": "Viewer",
+    "description": "Single-tenant user for Beta Industries"
+  }
+}

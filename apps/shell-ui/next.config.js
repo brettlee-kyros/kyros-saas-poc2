@@ -8,8 +8,26 @@ const nextConfig = {
     const apiBaseUrl = process.env.API_BASE_URL || 'http://localhost:8000'
     return [
       {
-        source: '/api/:path*',
-        destination: `${apiBaseUrl}/api/:path*`,
+        // Proxy /api/tenant/* and /api/dashboards/* to Python API
+        // Exclude /api/proxy/* (handled by Next.js API routes)
+        source: '/api/tenant/:path*',
+        destination: `${apiBaseUrl}/api/tenant/:path*`,
+      },
+      {
+        source: '/api/dashboards/:path*',
+        destination: `${apiBaseUrl}/api/dashboards/:path*`,
+      },
+      {
+        source: '/api/auth/:path*',
+        destination: `${apiBaseUrl}/api/auth/:path*`,
+      },
+      {
+        source: '/api/token/:path*',
+        destination: `${apiBaseUrl}/api/token/:path*`,
+      },
+      {
+        source: '/api/me',
+        destination: `${apiBaseUrl}/api/me`,
       },
     ]
   },

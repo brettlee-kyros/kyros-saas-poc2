@@ -1,10 +1,15 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import './globals.css'
 import { AuthProvider } from '@/contexts/AuthContext'
 import DebugPanel from '@/components/dashboard/DebugPanel'
-
-const inter = Inter({ subsets: ['latin'] })
+import { ToastContainer } from '@/components/ui/Toast'
+import { ThemeProvider } from '@mui/material/styles'
+import CssBaseline from '@mui/material/CssBaseline'
+import { theme } from './theme'
+import '@fontsource/roboto/300.css'
+import '@fontsource/roboto/400.css'
+import '@fontsource/roboto/500.css'
+import '@fontsource/roboto/700.css'
 
 export const metadata: Metadata = {
   title: 'Kyros SaaS PoC',
@@ -18,11 +23,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <AuthProvider>
-          {children}
-          <DebugPanel />
-        </AuthProvider>
+      <body>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <AuthProvider>
+            {children}
+            <DebugPanel />
+            <ToastContainer />
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

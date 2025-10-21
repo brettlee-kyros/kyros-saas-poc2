@@ -1,0 +1,7 @@
+--extra-index-url https://pkgs.dev.azure.com/kyrosinsights/f0835ca2-8662-4868-be8c-15b0d5d5d705/_packaging/dash-common/pypi/simple/
+-r requirements.txt
+pytest
+pytest-cov
+pytest-mock
+mock
+requests-mock

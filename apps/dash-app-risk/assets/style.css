@@ -1,0 +1,73 @@
+.info-box {
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+}
+
+dcc.Dropdown {
+    border-radius: 5px;
+    padding: 5px;
+}
+
+#date-1-selector, #date-2-selector {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 8px;
+    margin-top: 10px;
+}
+
+#date-warning {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .info-box {
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+}
+
+dcc.Dropdown {
+    border-radius: 5px;
+    padding: 5px;
+}
+
+
+#date-1-selector, #date-2-selector {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 8px;
+    margin-top: 10px;
+}
+#date-warning {
+    font-size: 12px;
+    font-weight: bold;
+} */

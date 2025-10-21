@@ -1,0 +1,205 @@
+/* MixShift specific styling */
+
+/* Segment Bubbler */
+.segment-bubbler {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+    background-color: #ffffff;
+}
+
+.segment-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.segment-row:hover {
+    background-color: #e9ecef;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.segment-row.selected {
+    background-color: #e7f1ff;
+    border: 1px solid #b6d4fe;
+    border-left: 4px solid #0d6efd;
+}
+
+.segment-name {
+    font-weight: 500;
+    color: #212529;
+    font-size: 0.95rem;
+}
+
+.weight-value {
+    color: #495057;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Variable Bubbler */
+.variable-bubbler {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+    background-color: #ffffff;
+}
+
+.variable-row {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 12px;
+    align-items: center;
+    padding: 12px 15px;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.variable-row:hover {
+    background-color: #e9ecef;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.variable-row.selected {
+    background-color: #e7f1ff;
+    border: 1px solid #b6d4fe;
+    border-left: 4px solid #0d6efd;
+}
+
+.variable-name {
+    font-weight: 500;
+    color: #212529;
+    font-size: 0.95rem;
+}
+
+.kl-container {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.kl-label {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.variable-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+}
+
+.buckets-info {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+/* Card header styling */
+.dash-design-kit .card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+    padding: 12px 15px;
+}
+
+.dash-design-kit .card-header h6 {
+    font-weight: 600;
+    color: #212529;
+    margin: 0;
+}
+
+/* Scrollbar styling */
+.segment-bubbler::-webkit-scrollbar,
+.variable-bubbler::-webkit-scrollbar {
+    width: 8px;
+}
+
+.segment-bubbler::-webkit-scrollbar-track,
+.variable-bubbler::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.segment-bubbler::-webkit-scrollbar-thumb,
+.variable-bubbler::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+.segment-bubbler::-webkit-scrollbar-thumb:hover,
+.variable-bubbler::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Percentage changes */
+.pct-change {
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.positive-change {
+    color: #198754;
+    background-color: #e8f5e9;
+}
+
+.negative-change {
+    color: #dc3545;
+    background-color: #fef2f2;
+}
+
+.neutral-change {
+    color: #6c757d;
+    background-color: #f8f9fa;
+}
+
+/* Custom styling for the radio buttons */
+.custom-radio-items {
+    display: block;
+}
+
+.custom-radio-items .form-check {
+    margin-bottom: 0;
+}
+
+.custom-radio-items .form-check-input:checked {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+/* Add a custom style for the segment and variable displays */
+#segment-display, #variable-display {
+    margin-top: 10px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    padding: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Style for the checkboxes and radio buttons */
+.form-check {
+    padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Improve visibility of the info modal button */
+#mixshift-modal-button:hover {
+    background-color: #f8f9fa !important;
+    border-radius: 4px;
+} 

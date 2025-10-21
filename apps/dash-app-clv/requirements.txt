@@ -1,6 +1,23 @@
-dash==2.18.1
-plotly==5.24.1
-pandas==2.2.3
-PyJWT==2.8.0
-pydantic>=2.10.0,<3.0
-requests==2.32.3
+# Core Dash and Plotly
+dash==2.18.0
+plotly==5.24.0
+
+# Data processing
+pandas==2.2.0
+numpy==1.26.0
+
+# HTTP client for data API
+requests==2.32.0
+
+# Flask (Dash server)
+flask==3.0.0
+
+# JWT handling
+PyJWT==2.9.0
+
+# Pydantic (required by shared_config)
+pydantic==2.10.0
+
+# UI components
+dash-bootstrap-components==1.6.0
+dash-mantine-components==0.14.4
