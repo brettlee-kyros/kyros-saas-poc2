@@ -1,11 +1,14 @@
 import { create } from 'zustand'
 import type { Tenant } from '@/types/tenant'
+import type { Dashboard } from '@/types/dashboard'
 
 interface TenantStore {
   selectedTenant: Tenant | null
   tenantToken: string | null
+  selectedDashboard: Dashboard | null
   setSelectedTenant: (tenant: Tenant) => void
   setTenantToken: (token: string) => void
+  setSelectedDashboard: (dashboard: Dashboard | null) => void
   clearTenant: () => void
 }
 
@@ -20,6 +23,7 @@ interface TenantStore {
 export const useTenantStore = create<TenantStore>((set) => ({
   selectedTenant: null,
   tenantToken: null,
+  selectedDashboard: null,
 
   setSelectedTenant: (tenant: Tenant) => {
     set({ selectedTenant: tenant })
@@ -29,7 +33,11 @@ export const useTenantStore = create<TenantStore>((set) => ({
     set({ tenantToken: token })
   },
 
+  setSelectedDashboard: (dashboard: Dashboard | null) => {
+    set({ selectedDashboard: dashboard })
+  },
+
   clearTenant: () => {
-    set({ selectedTenant: null, tenantToken: null })
+    set({ selectedTenant: null, tenantToken: null, selectedDashboard: null })
   },
 }))

@@ -45,7 +45,7 @@ export default function NavigationDrawer({
 }: NavigationDrawerProps) {
   const [dashboards, setDashboards] = useState<Dashboard[]>([])
   const [loading, setLoading] = useState(false)
-  const { selectedTenant, tenantToken } = useTenantStore()
+  const { selectedTenant, tenantToken, selectedDashboard, setSelectedDashboard } = useTenantStore()
   const router = useRouter()
   const pathname = usePathname()
 
@@ -91,12 +91,22 @@ export default function NavigationDrawer({
 
   const handleDashboardClick = (dashboard: Dashboard) => {
     if (!selectedTenant) return
-    router.push(`/tenant/${selectedTenant.slug}/dashboard/${dashboard.slug}`)
+
+    // Set the selected dashboard in the store
+    setSelectedDashboard(dashboard)
+
+    // Navigate to tenant page if not already there
+    const tenantPagePath = `/tenant/${selectedTenant.slug}`
+    if (pathname !== tenantPagePath) {
+      router.push(tenantPagePath)
+    }
+
     if (onClose) onClose()  // Close drawer on mobile
   }
 
   const isActive = (dashboardSlug: string) => {
-    return pathname?.includes(`/dashboard/${dashboardSlug}`)
+    // Check if this dashboard is selected in the store and we're on the tenant page
+    return selectedDashboard?.slug === dashboardSlug && pathname?.includes(`/tenant/${selectedTenant?.slug}`)
   }
 
   const drawerContent = (

@@ -5,6 +5,7 @@ import { useRouter, useParams } from 'next/navigation'
 import { Box, Typography, CircularProgress, Alert } from '@mui/material'
 import AuthGuard from '@/components/auth/AuthGuard'
 import DashboardLayout from '@/components/layout/DashboardLayout'
+import DashboardListingContent from '@/components/dashboard/DashboardListingContent'
 import { useTenantStore } from '@/stores/useTenantStore'
 import type { Dashboard, DashboardListResponse } from '@/types/dashboard'
 
@@ -107,17 +108,12 @@ function DashboardListingPage() {
               Dashboards for {selectedTenant?.name}
             </Typography>
 
-            {dashboards && dashboards.length === 0 ? (
-              <Box sx={{ textAlign: 'center', py: 8 }}>
-                <Typography variant="h6" color="text.secondary">
-                  No dashboards available for this tenant.
-                </Typography>
-              </Box>
-            ) : (
-              <Typography variant="body1" color="text.secondary">
-                {dashboards?.length || 0} dashboard(s) available
-              </Typography>
-            )}
+            <DashboardListingContent
+              dashboards={dashboards}
+              tenantToken={tenantToken || ''}
+              loading={loading}
+              error={error}
+            />
           </Box>
         )}
       </Box>

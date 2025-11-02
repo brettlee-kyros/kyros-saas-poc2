@@ -4,6 +4,7 @@ import { Box, useMediaQuery, useTheme } from '@mui/material'
 import { useState } from 'react'
 import AppBar from './AppBar'
 import NavigationDrawer from './NavigationDrawer'
+import TokenDebugMenu from '@/components/debug/TokenDebugMenu'
 
 const DRAWER_WIDTH = 240
 
@@ -41,6 +42,9 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       >
         {children}
       </Box>
+
+      {/* Debug Menu (PoC Only) */}
+      <TokenDebugMenu />
     </Box>
   )
 }
